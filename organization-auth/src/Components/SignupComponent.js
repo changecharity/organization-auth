@@ -2,6 +2,7 @@ import React from 'react';
 import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, makeStyles, ThemeProvider, Container } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import theme from '../Theme'
+import axios from 'axios'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -23,9 +24,29 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-
 function SignupComponent() {
     const classes = useStyles();
+    const [orgName, setOrgName] = React.useState("")
+    const [email, setEmail] = React.useState("")
+    const [pass, setPass] = React.useState("")
+
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        axios.post("https://changecharity.io/api/orgs/signup", {
+            email: "testemail@gmail.com",
+            password: "user_pass",
+            ein: 12342342342,
+            plaid_public_token: "GAA",
+            plaid_account_id: "reGAA"
+        }).then(response => {
+            console.log(response)
+            console.log("hey")
+        }).catch(error => {
+            console.log(error)
+            
+        })
+      }
     return (
         <div>
             <CssBaseline />
@@ -36,13 +57,15 @@ function SignupComponent() {
                 <Typography component="h1" variant="h5">
                     Sign up
           </Typography>
-                <form className={classes.form} noValidate>
+                <form className={classes.form} onSubmit={handleSubmit} noValidate>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={12}>
                             <TextField
                                 autoComplete="fname"
                                 name="orgName"
                                 variant="outlined"
+                                value={orgName}
+                                onChange={e=> setOrgName(e.target.value)}
                                 required
                                 fullWidth
                                 id="orgName"
@@ -55,6 +78,8 @@ function SignupComponent() {
                                 variant="outlined"
                                 required
                                 fullWidth
+                                value={email}
+                                onChange={e=> setEmail(e.target.value)}
                                 id="email"
                                 label="Email Address"
                                 name="email"
@@ -66,6 +91,8 @@ function SignupComponent() {
                                 variant="outlined"
                                 required
                                 fullWidth
+                                value={pass}
+                                onChange={e=> setPass(e.target.value)}
                                 name="password"
                                 label="Password"
                                 type="password"
@@ -92,7 +119,6 @@ function SignupComponent() {
                    
                 </form>
             </div>
-            
             </div>
     );
 }

@@ -35,7 +35,6 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-
 function App() {
   const classes = useStyles();
   const [signinActive, setSignInActive] = useState(true)

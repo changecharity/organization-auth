@@ -35,9 +35,13 @@ function AuthenticateComponent() {
     const [key, setKey] = React.useState("")
     function handleSubmit(event) {
       event.preventDefault();
-      axios.post("https://changecharity.io/api/orgs/updatesignup", JSON.stringify({
-        key: parseInt(key, 10),
-      })).then(response => {
+      axios({
+      url: "https://changecharity.io/api/orgs/updatesignup",
+      data: JSON.stringify({
+          key: parseInt(key, 10)
+      }),
+      method: "POST",
+      withCredentials: true}).then(response => {
           console.log(response)
       }).catch(error => {
           console.log(error)
@@ -67,7 +71,7 @@ function AuthenticateComponent() {
               id="code"
               label="6 digit code"
               name="key"
-              
+
               autoFocus
             />
             <Button

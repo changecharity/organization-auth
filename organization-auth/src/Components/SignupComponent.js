@@ -35,19 +35,23 @@ function SignupComponent(props) {
     const [orgName, setOrgName] = React.useState("")
     const [email, setEmail] = React.useState("")
     const [pass, setPass] = React.useState("")
-     
+
     function handleSubmit(event) {
         event.preventDefault();
-        axios.post("https://changecharity.io/api/orgs/signup", JSON.stringify({
+        axios({ url: "https://changecharity.io/api/orgs/signup",
+        data: JSON.stringify({
             name: orgName,
             email: email,
             password: pass,
-            ein: 12345678,
-            plaid_public_token: "unique23",
-            plaid_account_id: "also_unique23"
-        })).then(response => {
+            ein: 12345822,
+            plaid_public_token: "ssdfdsfsssd",
+            plaid_account_id: "adfdfdss"
+        }),
+        method: "POST",
+        withCredentials: true}).then(response => {
+            console.log(response);
+            if(response.data.startsWith("eyJhbGciOi"))
             window.location.href = '/confirm';
-            
         }).catch(error => {
             console.log(error)
         })

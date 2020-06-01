@@ -3,6 +3,12 @@ import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Lin
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import theme from '../Theme'
 import axios from 'axios'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+  } from "react-router-dom";
+  import { Link as RouterLink } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -24,27 +30,26 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-function SignupComponent() {
+function SignupComponent(props) {
     const classes = useStyles();
     const [orgName, setOrgName] = React.useState("")
     const [email, setEmail] = React.useState("")
     const [pass, setPass] = React.useState("")
-
-
+     
     function handleSubmit(event) {
         event.preventDefault();
-        axios.post("https://changecharity.io/api/orgs/signup", {
-            email: "testemail@gmail.com",
-            password: "user_pass",
-            ein: 12342342342,
-            plaid_public_token: "GAA",
-            plaid_account_id: "reGAA"
-        }).then(response => {
-            console.log(response)
-            console.log("hey")
+        axios.post("https://changecharity.io/api/orgs/signup", JSON.stringify({
+            name: orgName,
+            email: email,
+            password: pass,
+            ein: 12345678,
+            plaid_public_token: "unique23",
+            plaid_account_id: "also_unique23"
+        })).then(response => {
+            window.location.href = '/confirm';
+            
         }).catch(error => {
             console.log(error)
-            
         })
       }
     return (
@@ -116,7 +121,6 @@ function SignupComponent() {
                     >
                         Sign Up
                     </Button>
-                   
                 </form>
             </div>
             </div>

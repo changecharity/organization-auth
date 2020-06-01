@@ -3,6 +3,12 @@ import {Avatar, Button, CssBaseline, TextField,FormControlLabel,Checkbox,Link,Gr
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import theme from '../Theme'
 import axios from 'axios'
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+  } from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -24,15 +30,13 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
-function SigninComponent() {
+function AuthenticateComponent() {
     const classes = useStyles();
-    const [email, setEmail] = React.useState("")
-    const [pass, setPass] = React.useState("")
+    const [key, setKey] = React.useState("")
     function handleSubmit(event) {
       event.preventDefault();
-      axios.post("https://changecharity.io/api/orgs/login", JSON.stringify({
-        email: email,
-        password: pass,
+      axios.post("https://changecharity.io/api/orgs/updatesignup", JSON.stringify({
+        key: parseInt(key, 10),
       })).then(response => {
           console.log(response)
       }).catch(error => {
@@ -47,38 +51,24 @@ function SigninComponent() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Enter Code
+          </Typography>
+          <Typography component="h5">
+            A 6 digit code was sent to your email.
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
               required
-              value={email}
-              onChange={e=> setEmail(e.target.value)}
+              value={key}
+              onChange={e=> setKey(e.target.value)}
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="code"
+              label="6 digit code"
+              name="key"
+              
               autoFocus
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              value={pass}
-              onChange={e=> setPass(e.target.value)}
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
             />
             <Button
               type="submit"
@@ -87,7 +77,7 @@ function SigninComponent() {
               color="primary"
               className={classes.submit}
             >
-              Sign In
+              Confirm
             </Button>
 
           </form>
@@ -99,7 +89,7 @@ function SigninComponent() {
   export default function CustomStyles() {
     return (
       <ThemeProvider theme={theme}>
-        <SigninComponent />
+        <AuthenticateComponent />
       </ThemeProvider>
     );
   }

@@ -4,6 +4,7 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import Copyright from './Components/CopyrightComponent'
 import SigninComponent from './Components/SigninComponent'
 import SignupComponent from './Components/SignupComponent'
+import AuthenticateComponent from './Components/AuthenticateComponent'
 import {
   BrowserRouter as Router,
   Switch,
@@ -44,10 +45,13 @@ function App() {
       <Container component="main" maxWidth="xs">
       <Switch>
         <Route path="/signin">
-          <SigninComponent />
+          <SigninComponent  />
         </Route>
         <Route path="/signup">
-          <SignupComponent />
+          <SignupComponent justavar={"dfs"} toRun={setSignInActive} />
+        </Route>
+        <Route path="/confirm">
+          <AuthenticateComponent />
         </Route>
         <Route path="/">
           <SigninComponent />

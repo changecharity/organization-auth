@@ -8,7 +8,7 @@ import {
     Switch,
     Route,
   } from "react-router-dom";
-import { Link as RouterLink } from "react-router-dom"
+  import { Link as RouterLink } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -28,42 +28,21 @@ const useStyles = makeStyles((theme) => ({
     submit: {
       margin: theme.spacing(3, 0, 2),
     },
-    resendButton: {
-      marginTop: theme.spacing(0),
-      marginBottom: "10px"
-    }
   }));
 
-function AuthenticateComponent() {
+function ForgotPasswordComponent() {
     const classes = useStyles();
-    const [key, setKey] = React.useState("")
-
+    const [email, setEmail] = React.useState("")
     function handleSubmit(event) {
       event.preventDefault();
-      axios({
-      url: "https://changecharity.io/api/orgs/updatesignup",
-      data: JSON.stringify({
-          key: parseInt(key, 10)
-      }),
-      method: "POST",
-      withCredentials: true}).then(response => {
+      axios({ url: "https://changecharity.io/api/orgs/sendforgotpass",
+        data: JSON.stringify({
+            email: email
+        }),
+        method: "POST",
+        withCredentials: true}).then(response => {
           console.log(response)
-      }).catch(error => {
-          console.log(error)
-      })
-    }
-
-    function resendAuthCode(e) {
-      e.preventDefault();
-      console.log("i guess")
-      axios({
-      url: "https://changecharity.io/api/orgs/resendemailkey",
-      data: JSON.stringify({
-          
-      }),
-      method: "POST",
-      withCredentials: true}).then(response => {
-          console.log(response)
+          window.location.href = '/forgotpassvalidate';
 
       }).catch(error => {
           console.log(error)
@@ -77,23 +56,20 @@ function AuthenticateComponent() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Enter Code
-          </Typography>
-          <Typography component="h5">
-            A 6 digit code was sent to your email.
+            Forgot Password
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField
               variant="outlined"
               margin="normal"
               required
-              value={key}
-              onChange={e=> setKey(e.target.value)}
+              value={email}
+              onChange={e=> setEmail(e.target.value)}
               fullWidth
-              id="code"
-              label="6 digit code"
-              name="key"
-
+              id="email"
+              label="Email Address"
+              name="email"
+              autoComplete="email"
               autoFocus
             />
             <Button
@@ -103,8 +79,9 @@ function AuthenticateComponent() {
               color="primary"
               className={classes.submit}
             >
-              Confirm
+              Send Temporary Passcode
             </Button>
+
           </form>
         </div>
         <Grid container>
@@ -117,8 +94,8 @@ function AuthenticateComponent() {
           </Grid>
           <Grid item>
           <RouterLink to='/signup'>
-          <Link onClick={ e => resendAuthCode(e)} className={classes.link} variant="body2">
-              {"Resend Code"}
+          <Link  className={classes.link} variant="body2">
+              {"Don't have an account? Sign Up"}
             </Link>
           </RouterLink>
           </Grid>
@@ -127,4 +104,4 @@ function AuthenticateComponent() {
     );
   }
 
-  export default AuthenticateComponent
+  export default ForgotPasswordComponent

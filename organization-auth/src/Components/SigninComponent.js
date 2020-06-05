@@ -3,6 +3,12 @@ import {Avatar, Button, CssBaseline, TextField,FormControlLabel,Checkbox,Link,Gr
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import theme from '../Theme'
 import axios from 'axios'
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+} from "react-router-dom";
+import { Link as RouterLink } from "react-router-dom"
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -92,14 +98,24 @@ function SigninComponent() {
 
           </form>
         </div>
+        <Grid container>
+          <Grid item xs>
+          <RouterLink to='/forgotpass'>
+            <Link className={classes.link} variant="body2">
+                {"Forgot Password?"}
+              </Link>
+            </RouterLink>
+          </Grid>
+          <Grid item>
+          <RouterLink to='/signup'>
+          <Link  className={classes.link} variant="body2">
+              {"Don't have an account? Sign Up"}
+            </Link>
+          </RouterLink>
+          </Grid>
+        </Grid>
         </div>
     );
   }
 
-  export default function CustomStyles() {
-    return (
-      <ThemeProvider theme={theme}>
-        <SigninComponent />
-      </ThemeProvider>
-    );
-  }
+  export default SigninComponent

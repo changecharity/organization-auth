@@ -5,6 +5,9 @@ import Copyright from './Components/CopyrightComponent'
 import SigninComponent from './Components/SigninComponent'
 import SignupComponent from './Components/SignupComponent'
 import AuthenticateComponent from './Components/AuthenticateComponent'
+import ForgotPasswordComponent from './Components/ForgotPasswordComponent'
+import ValidateForgotPasswordCode from './Components/ValidateForgotPasswordCode'
+import EnterNewPassword from './Components/EnterNewPassword'
 import {
   BrowserRouter as Router,
   Switch,
@@ -38,8 +41,6 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
-  const [signinActive, setSignInActive] = useState(true)
-
   return (
     <Router>
       <Container component="main" maxWidth="xs">
@@ -47,8 +48,17 @@ function App() {
         <Route path="/signin">
           <SigninComponent  />
         </Route>
+        <Route path="/enternewpass">
+          <EnterNewPassword   />
+        </Route>
+        <Route path="/forgotpassvalidate">
+          <ValidateForgotPasswordCode  />
+        </Route>
+        <Route path="/forgotpass">
+          <ForgotPasswordComponent  />
+        </Route>
         <Route path="/signup">
-          <SignupComponent justavar={"dfs"} toRun={setSignInActive} />
+          <SignupComponent  />
         </Route>
         <Route path="/confirm">
           <AuthenticateComponent />
@@ -57,33 +67,6 @@ function App() {
           <SigninComponent />
         </Route>
       </Switch>
-      
-        <Grid container>
-          <Grid item xs>
-          <RouterLink to='/'>
-            <Link onClick={ e => setSignInActive(false)} className={classes.link} variant="body2">
-                {"Forgot Password?"}
-              </Link>
-            </RouterLink>
-          </Grid>
-          <Grid item>
-          {
-            signinActive ? (
-              <RouterLink to='/signup'>
-            <Link onClick={ e => setSignInActive(false)} className={classes.link} variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </RouterLink>
-            ) : (
-            <RouterLink to='/signin'>
-              <Link onClick={ e => setSignInActive(true)} className={classes.link} variant="body2">
-                  {"Already have an account? Sign in"}
-              </Link>
-            </RouterLink>
-            )
-          }
-          </Grid>
-        </Grid>
         <Box mt={8}>
           <Copyright />
         </Box>

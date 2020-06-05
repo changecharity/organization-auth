@@ -38,20 +38,23 @@ function SignupComponent(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
+        console.log(props)
         axios({ url: "https://changecharity.io/api/orgs/signup",
         data: JSON.stringify({
             name: orgName,
             email: email,
             password: pass,
-            ein: 12345822,
-            plaid_public_token: "ssdfdsfsssd",
-            plaid_account_id: "adfdfdss"
+            ein: 12341920,
+            plaid_public_token: "beeud0dniqu9e1",
+            plaid_account_id: "beeuald0soun7ique1"
         }),
         method: "POST",
         withCredentials: true}).then(response => {
             console.log(response);
-            if(response.data.startsWith("eyJhbGciOi"))
             window.location.href = '/confirm';
+            if(response.data.startsWith("eyJhbGciOi")) {
+                
+            }
         }).catch(error => {
             console.log(error)
         })
@@ -127,14 +130,25 @@ function SignupComponent(props) {
                     </Button>
                 </form>
             </div>
+            <Grid container>
+          <Grid item xs>
+          <RouterLink to='/forgotpass'>
+            <Link className={classes.link} variant="body2">
+                {"Forgot Password?"}
+              </Link>
+            </RouterLink>
+          </Grid>
+          <Grid item>
+          <RouterLink to='/signin'>
+          <Link  className={classes.link} variant="body2">
+              {"Already have an account? Sign in"}
+            </Link>
+          </RouterLink>
+          </Grid>
+        </Grid>
             </div>
     );
 }
 
-export default function CustomStyles() {
-    return (
-      <ThemeProvider theme={theme}>
-        <SignupComponent />
-      </ThemeProvider>
-    );
-  }
+export default SignupComponent
+  

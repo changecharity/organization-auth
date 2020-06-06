@@ -77,7 +77,7 @@ function SignupComponent(props) {
     function handleSubmit(event) {
         event.preventDefault();
         console.log(props)
-        axios({ url: "https://changecharity.io/api/orgs/signup",
+        axios({ url: "https://api.changecharity.io/orgs/signup",
         data: JSON.stringify({
             name: orgName,
             email: email,
@@ -91,7 +91,7 @@ function SignupComponent(props) {
             console.log(response);
             window.location.href = '/confirm';
             if(response.data.startsWith("eyJhbGciOi")) {
-                
+
             }
         }).catch(error => {
             console.log(error)
@@ -226,4 +226,3 @@ function SignupComponent(props) {
 }
 
 export default SignupComponent
-  

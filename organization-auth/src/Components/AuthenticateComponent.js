@@ -41,7 +41,7 @@ function AuthenticateComponent() {
     function handleSubmit(event) {
       event.preventDefault();
       axios({
-      url: "https://changecharity.io/api/orgs/updatesignup",
+      url: "https://api.changecharity.io/orgs/updatesignup",
       data: JSON.stringify({
           key: parseInt(key, 10)
       }),
@@ -57,9 +57,9 @@ function AuthenticateComponent() {
       e.preventDefault();
       console.log("i guess")
       axios({
-      url: "https://changecharity.io/api/orgs/resendemailkey",
+      url: "https://api.changecharity.io/orgs/resendemailkey",
       data: JSON.stringify({
-          
+
       }),
       method: "POST",
       withCredentials: true}).then(response => {

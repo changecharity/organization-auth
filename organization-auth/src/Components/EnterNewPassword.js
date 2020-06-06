@@ -42,7 +42,7 @@ function EnterNewPassword() {
     function handleSubmit(event) {
         event.preventDefault();
         axios({
-            url: "https://changecharity.io/api/orgs/forgotpass",
+            url: "https://api.changecharity.io/orgs/forgotpass",
             data: JSON.stringify({
                 password: newPass,
                 key: parseInt(cookie.load('passkey'), 10),

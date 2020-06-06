@@ -36,7 +36,7 @@ function SigninComponent() {
     const [pass, setPass] = React.useState("")
     function handleSubmit(event) {
       event.preventDefault();
-      axios.post("https://changecharity.io/api/orgs/login", JSON.stringify({
+      axios.post("https://api.changecharity.io/orgs/login", JSON.stringify({
         email: email,
         password: pass,
       })).then(response => {

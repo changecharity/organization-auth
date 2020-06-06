@@ -41,7 +41,7 @@ function ValidateForgotPasswordCode(props) {
     function handleSubmit(event) {
         event.preventDefault();
         axios({
-            url: "https://changecharity.io/api/orgs/validkey",
+            url: "https://api.changecharity.io/orgs/validkey",
             data: JSON.stringify({
                 key: parseInt(props.forgotPasswordCode, 10)
             }),

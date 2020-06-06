@@ -35,7 +35,7 @@ function ForgotPasswordComponent() {
     const [email, setEmail] = React.useState("")
     function handleSubmit(event) {
       event.preventDefault();
-      axios({ url: "https://changecharity.io/api/orgs/sendforgotpass",
+      axios({ url: "https://api.changecharity.io/orgs/sendforgotpass",
         data: JSON.stringify({
             email: email
         }),

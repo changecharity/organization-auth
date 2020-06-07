@@ -82,7 +82,7 @@ function SignupComponent(props) {
             name: orgName,
             email: email,
             password: pass,
-            ein: ein,
+            ein: Number(ein),
             plaid_public_token: plaidToken,
             plaid_account_id: accountId
         }),
@@ -95,6 +95,7 @@ function SignupComponent(props) {
             }
         }).catch(error => {
             console.log(error)
+            console.log(error.response)
         })
       }
     return (

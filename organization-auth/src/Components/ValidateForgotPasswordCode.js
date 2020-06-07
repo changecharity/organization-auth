@@ -43,15 +43,16 @@ function ValidateForgotPasswordCode(props) {
         axios({
             url: "https://api.changecharity.io/orgs/validkey",
             data: JSON.stringify({
-                key: parseInt(props.forgotPasswordCode, 10)
+                key: Number(forgotPasswordCode)
             }),
             method: "POST",
             withCredentials: true
         }).then(response => {
-            cookie.save('passkey', props.forgotPasswordCode, { path: '/' })
+            cookie.save('passkey', forgotPasswordCode, { path: '/' })
             window.location.href = '/enternewpass';
         }).catch(error => {
             console.log(error)
+            console.log(error.response)
         })
     }
 

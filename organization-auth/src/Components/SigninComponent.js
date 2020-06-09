@@ -34,6 +34,10 @@ function SigninComponent() {
     const classes = useStyles();
     const [email, setEmail] = React.useState("")
     const [pass, setPass] = React.useState("")
+    const [emailError, setEmailError] = React.useState(false)
+    const [passError, setPassError] = React.useState(false)
+    const [passHelperText, setPassHelperText] = React.useState("Incorrect Password")
+    const [emailHelperText, setEmailHelperText] = React.useState("Email Not Recognized")
     function handleSubmit(event) {
       event.preventDefault();
       axios.post("https://api.changecharity.io/orgs/login", JSON.stringify({
@@ -41,6 +45,17 @@ function SigninComponent() {
         password: pass,
       })).then(response => {
           console.log(response)
+          if (response["status"] == 206) {
+            console.log("errr")
+            console.log(response["data"])
+            if (response["data"].includes("Password")) {
+              setPassError(true)
+              setPassHelperText("Incorrect Password")
+            } else if (response["data"].includes("Email")) {
+              setEmailError(true)
+              setEmailHelperText("Email Not Recognized")
+            }
+          }
       }).catch(error => {
           console.log(error)
       })
@@ -60,8 +75,16 @@ function SigninComponent() {
               variant="outlined"
               margin="normal"
               required
+              error={emailError}
+              helperText={emailHelperText}
               value={email}
-              onChange={e=> setEmail(e.target.value)}
+              onChange={e=> 
+                {
+                setEmail(e.target.value)
+                setEmailError(false)
+                setEmailHelperText("")
+                }
+              }
               fullWidth
               id="email"
               label="Email Address"
@@ -73,8 +96,16 @@ function SigninComponent() {
               variant="outlined"
               margin="normal"
               required
+              error={passError}
+              helperText={passHelperText}
               value={pass}
-              onChange={e=> setPass(e.target.value)}
+              onChange={e=> 
+                {
+                setPass(e.target.value)
+                setPassError(false)
+                setPassHelperText("")
+                }
+              }
               fullWidth
               name="password"
               label="Password"

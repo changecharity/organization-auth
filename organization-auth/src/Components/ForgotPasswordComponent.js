@@ -33,6 +33,8 @@ const useStyles = makeStyles((theme) => ({
 function ForgotPasswordComponent() {
     const classes = useStyles();
     const [email, setEmail] = React.useState("")
+    const [error, setError] = React.useState(false)
+    const [errorDes, setErrorDes] = React.useState("")
     function handleSubmit(event) {
       event.preventDefault();
       axios({ url: "https://api.changecharity.io/orgs/sendforgotpass",
@@ -42,7 +44,12 @@ function ForgotPasswordComponent() {
         method: "POST",
         withCredentials: true}).then(response => {
           console.log(response)
+          if (response["data"].includes("error")) {
+            setError(true)
+            setErrorDes("Invalid Email")
+          } else {
           window.location.href = '/forgotpassvalidate';
+          }
 
       }).catch(error => {
           console.log(error)
@@ -62,9 +69,17 @@ function ForgotPasswordComponent() {
             <TextField
               variant="outlined"
               margin="normal"
+              error={error}
+              helperText={errorDes}
               required
               value={email}
-              onChange={e=> setEmail(e.target.value)}
+              onChange={e=> 
+                {
+                setEmail(e.target.value)
+                setError(false)
+                setErrorDes("")
+                }
+              }
               fullWidth
               id="email"
               label="Email Address"

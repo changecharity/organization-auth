@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
 function AuthenticateComponent() {
     const classes = useStyles();
     const [key, setKey] = React.useState("")
+    const [error, setError] = React.useState(false)
+    const [errorDes, setErrorDes] = React.useState("Invalid Code")
 
     function handleSubmit(event) {
       event.preventDefault();
@@ -47,7 +49,11 @@ function AuthenticateComponent() {
       }),
       method: "POST",
       withCredentials: true}).then(response => {
-          console.log(response)
+          console.log(response["data"])
+          if (response["data"].includes("incorrect")) {
+            setError(true)
+            setErrorDes("Invalid Code")
+          }
       }).catch(error => {
           console.log(error)
       })
@@ -64,12 +70,11 @@ function AuthenticateComponent() {
       method: "POST",
       withCredentials: true}).then(response => {
           console.log(response)
-
       }).catch(error => {
           console.log(error)
       })
     }
-    return (
+    return ( 
       <div>
         <CssBaseline />
         <div className={classes.paper}>
@@ -87,8 +92,16 @@ function AuthenticateComponent() {
               variant="outlined"
               margin="normal"
               required
+              error={error}
+              helperText={errorDes}
               value={key}
-              onChange={e=> setKey(e.target.value)}
+              onChange={e=> 
+                {
+                setKey(e.target.value)
+                setError(false)
+                setErrorDes("")
+                }
+              }
               fullWidth
               id="code"
               label="6 digit code"

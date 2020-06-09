@@ -38,18 +38,25 @@ const useStyles = makeStyles((theme) => ({
 function ValidateForgotPasswordCode(props) {
     const classes = useStyles();
     const [forgotPasswordCode, setForgotPasswordCode] = React.useState("")
+    const [error, setError] = React.useState(false)
+    const [errorDes, setErrorDes] = React.useState("")
     function handleSubmit(event) {
         event.preventDefault();
         axios({
             url: "https://api.changecharity.io/orgs/validkey",
             data: JSON.stringify({
-                key: parseInt(props.forgotPasswordCode, 10)
+                key: parseInt(forgotPasswordCode, 10)
             }),
             method: "POST",
             withCredentials: true
         }).then(response => {
+            if (response["data"].includes("incorrect")) {
+                setError(true)
+                setErrorDes("Invalid Code")
+            } else {
             cookie.save('passkey', props.forgotPasswordCode, { path: '/' })
             window.location.href = '/enternewpass';
+            }
         }).catch(error => {
             console.log(error)
         })
@@ -73,8 +80,16 @@ function ValidateForgotPasswordCode(props) {
                         variant="outlined"
                         margin="normal"
                         required
+                        error={error}
+                        helperText={errorDes}
                         value={forgotPasswordCode}
-                        onChange={e => setForgotPasswordCode(e.target.value)}
+                        onChange={e=>
+                            {
+                            setForgotPasswordCode(e.target.value)
+                            setError(false)
+                            setErrorDes("")
+                            }
+                          }
                         fullWidth
                         id="code"
                         label="6 digit code"

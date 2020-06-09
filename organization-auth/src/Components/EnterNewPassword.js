@@ -38,22 +38,31 @@ const useStyles = makeStyles((theme) => ({
 function EnterNewPassword() {
     const classes = useStyles();
     const [newPass, setNewPass] = React.useState("")
+    const [error, setError] = React.useState(false)
+    const [errorDes, setErrorDes] = React.useState("")
 
     function handleSubmit(event) {
         event.preventDefault();
-        axios({
-            url: "https://api.changecharity.io/orgs/forgotpass",
-            data: JSON.stringify({
-                password: newPass,
-                key: parseInt(cookie.load('passkey'), 10),
-            }),
-            method: "POST",
-            withCredentials: true
-        }).then(response => {
-            console.log(response)
-        }).catch(error => {
-            console.log(error)
-        })
+        if (newPass.length >= 8) {
+            axios({
+                url: "https://api.changecharity.io/orgs/forgotpass",
+                data: JSON.stringify({
+                    password: newPass,
+                    key: parseInt(cookie.load('passkey'), 10),
+                }),
+                method: "POST",
+                withCredentials: true
+            }).then(response => {
+                console.log(response)
+            }).catch(error => {
+                console.log(error)
+                setError(true)
+                setErrorDes(error.response)
+            })
+        } else {
+            setError(true)
+            setErrorDes("Password must be at least 8 characters")
+        }
     }
 
     return (
@@ -70,9 +79,17 @@ function EnterNewPassword() {
                     <TextField
                         variant="outlined"
                         margin="normal"
+                        error={error}
+                        helperText={errorDes}
                         required
                         value={newPass}
-                        onChange={e => setNewPass(e.target.value)}
+                        onChange={e=> 
+                            {
+                            setNewPass(e.target.value)
+                            setError(false)
+                            setErrorDes("")
+                            }
+                          }
                         fullWidth
                         label="New Password"
                         type="password"

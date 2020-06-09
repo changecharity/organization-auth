@@ -45,7 +45,7 @@ function ValidateForgotPasswordCode(props) {
         axios({
             url: "https://api.changecharity.io/orgs/validkey",
             data: JSON.stringify({
-                key: parseInt(forgotPasswordCode, 10)
+                key: Number(forgotPasswordCode)
             }),
             method: "POST",
             withCredentials: true
@@ -59,6 +59,7 @@ function ValidateForgotPasswordCode(props) {
             }
         }).catch(error => {
             console.log(error)
+            console.log(error.response)
         })
     }
 

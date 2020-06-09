@@ -152,11 +152,12 @@ function SignupComponent(props) {
                                 variant="outlined"
                                 value={ein}
                                 onChange={e => {
-                                    if (e.target.value.length === 2 && !e.target.value.includes("-")) {
-                                        setEin(e.target.value + "-")
+                                    var eidOnlyNumbers = e.target.value.replace(/\D/g, "")
+                                    if (eidOnlyNumbers.length === 2 && !eidOnlyNumbers.includes("-")) {
+                                        setEin(eidOnlyNumbers + "-")
                                     } else {
-                                        if (!(e.target.value.indexOf("-") != -1 && e.target.value.indexOf("-") > 2)) {
-                                            setEin(e.target.value)
+                                        if (!(eidOnlyNumbers.indexOf("-") != -1 && eidOnlyNumbers.indexOf("-") > 2)) {
+                                            setEin(eidOnlyNumbers)
                                         }
                                     }
                                 }

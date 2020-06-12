@@ -55,6 +55,10 @@ function SignupComponent(props) {
     const [openError, setOpenError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false)
     const [errorDes, setErrorDes] = React.useState("")
+    const [einError, setEinError] = React.useState(false)
+    const [einErrorDes, setEinErrorDes] = React.useState("")
+    const [emailError, setEmailError] = React.useState(false)
+    const [emailErrorDes, setEmailErrorDes] = React.useState("")
     const onSuccess = useCallback((token, metadata) => {
         // send token to server
         setPlaidToken(token)
@@ -84,9 +88,8 @@ function SignupComponent(props) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(plaidToken)
         const onlyDigitsEIN = ein.replace(/\D/g, "")
-        if ((bankAccountEntered==true) && (onlyDigitsEIN.length==8 || onlyDigitsEIN.length==9) && (!orgName=="") && (!email.length==0) && (pass>=8) ) {
+        if ((bankAccountEntered==true) && (onlyDigitsEIN.length==8 || onlyDigitsEIN.length==9) && (!orgName=="") && (!email.length==0) && (pass.length>=8) ) {
             axios({ 
                 url: "https://api.changecharity.io/orgs/signup",
                 data: JSON.stringify({
@@ -101,7 +104,17 @@ function SignupComponent(props) {
                 withCredentials: true
             }).then(response => {
                 console.log(response);
+                if (response["status"] == 206) {
+                    if (response["data"].includes("ein")) {
+                        setEinError(true)
+                        setEinErrorDes("EIN already exists")
+                    } else if (response["data"].includes("email")) {
+                        setEmailError(true)
+                        setEmailErrorDes("Email already exists")
+                    }
+                } else {
                 window.location.href = '/confirm';
+                }
                 if (response.data.startsWith("eyJhbGciOi")) {
 
                 }
@@ -149,10 +162,14 @@ function SignupComponent(props) {
                             <TextField
                                 autoComplete="fname"
                                 name="orgEin"
+                                error={einError}
+                                helperText={einErrorDes}
                                 variant="outlined"
                                 value={ein}
                                 onChange={e => {
-                                    var eidOnlyNumbers = e.target.value.replace(/\D/g, "")
+                                    setErrorDes("")
+                                    setEinError(false)
+                                    var eidOnlyNumbers = e.target.value.replace(/[^\d-]/g, '')
                                     if (eidOnlyNumbers.length === 2 && !eidOnlyNumbers.includes("-")) {
                                         setEin(eidOnlyNumbers + "-")
                                     } else {
@@ -173,9 +190,14 @@ function SignupComponent(props) {
                             <TextField
                                 variant="outlined"
                                 required
+                                error={emailError}
+                                helperText={emailErrorDes}
                                 fullWidth
                                 value={email}
-                                onChange={e => setEmail(e.target.value)}
+                                onChange={e => {
+                                    setEmailErrorDes("")
+                                    setEmailError(false)
+                                    setEmail(e.target.value)}}
                                 id="email"
                                 label="Email Address"
                                 name="email"

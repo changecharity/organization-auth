@@ -45,7 +45,7 @@ function EnterNewPassword() {
         event.preventDefault();
         if (newPass.length >= 8) {
             axios({
-                url: "https://api.changecharity.io/orgs/forgotpass",
+                url: "https://api.changecharity.io/orgs/forgotpass", 
                 data: JSON.stringify({
                     password: newPass,
                     key: parseInt(cookie.load('passkey'), 10),

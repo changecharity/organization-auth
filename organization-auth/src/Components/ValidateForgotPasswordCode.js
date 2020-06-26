@@ -54,7 +54,7 @@ function ValidateForgotPasswordCode(props) {
                 setError(true)
                 setErrorDes("Invalid Code")
             } else {
-            cookie.save('passkey', props.forgotPasswordCode, { path: '/' })
+            cookie.save('passkey', forgotPasswordCode, { path: '/' })
             window.location.href = '/enternewpass';
             }
         }).catch(error => {

@@ -42,6 +42,7 @@ function AuthenticateComponent() {
 
     function handleSubmit(event) {
       event.preventDefault();
+      console.log(key)
       axios({
       url: "https://api.changecharity.io/orgs/updatesignup",
       data: JSON.stringify({
@@ -129,7 +130,7 @@ function AuthenticateComponent() {
             </RouterLink>
           </Grid>
           <Grid item>
-          <RouterLink to='/signup'>
+          <RouterLink>
           <Link onClick={ e => resendAuthCode(e)} className={classes.link} variant="body2">
               {"Resend Code"}
             </Link>

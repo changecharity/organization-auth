@@ -63,8 +63,7 @@ function SignupComponent(props) {
         // send token to server
         setPlaidToken(token)
         setBankName(metadata["institution"]["name"])
-        setAccountId(metadata["accounts"][0]["id"])
-
+        setCheckingAccountId(metadata["accounts"])
         setBankAccountEntered(true)
     }, []);
     const config = {
@@ -86,6 +85,15 @@ function SignupComponent(props) {
         setOpenError(false);
       };
 
+    function setCheckingAccountId(accounts) {
+        accounts.forEach(account => {
+            if (account["name"].includes("Checking")) {
+                console.log("gotit")
+                console.log(account["id"])
+                setAccountId(account["id"])
+            }
+        })
+    }
     function handleSubmit(event) {
         event.preventDefault();
         const onlyDigitsEIN = ein.replace(/\D/g, "")

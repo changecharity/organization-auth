@@ -68,7 +68,7 @@ function SignupComponent(props) {
     }, []);
     const config = {
         clientName: 'Change',
-        env: 'sandbox',
+        env: 'development',
         product: ['transactions'],
         publicKey: '014d4f2c01905eafa07cbcd2755ef5',
         onSuccess,

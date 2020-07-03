@@ -40,10 +40,15 @@ function SigninComponent() {
     const [emailHelperText, setEmailHelperText] = React.useState("Email Not Recognized")
     function handleSubmit(event) {
       event.preventDefault();
-      axios.post("https://api.changecharity.io/orgs/login", JSON.stringify({
-        email: email,
-        password: pass,
-      })).then(response => {
+      axios({ 
+        url: "https://api.changecharity.io/orgs/login",
+        data: JSON.stringify({
+            email: email,
+            password: pass
+        }),
+        method: "POST",
+        withCredentials: true
+    }).then(response => {
           console.log(response)
           if (response["status"] == 206) {
             console.log("errr")
@@ -55,6 +60,8 @@ function SigninComponent() {
               setEmailError(true)
               setEmailHelperText("Email Not Recognized")
             }
+          } else if (response["status"]==200) {
+              window.location.href = 'https://dashboard.changecharity.io/'
           }
       }).catch(error => {
           console.log(error)

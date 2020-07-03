@@ -101,6 +101,9 @@ function App() {
             )
           } else if (response!=null) {
             console.log(response)
+            if (response["data"] === "success") {
+              window.location.href = 'https://dashboard.changecharity.io/'
+            } 
             return (
               <Router>
               <Container component="main" maxWidth="xs">

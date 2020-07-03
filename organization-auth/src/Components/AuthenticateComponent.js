@@ -50,10 +50,12 @@ function AuthenticateComponent() {
       }),
       method: "POST",
       withCredentials: true}).then(response => {
-          console.log(response["data"])
+          console.log(response)
           if (response["data"].includes("incorrect")) {
             setError(true)
             setErrorDes("Invalid Code")
+          } else if (response["status"]==200) {
+            window.location.href = 'https://dashboard.changecharity.io/'
           }
       }).catch(error => {
           console.log(error)

@@ -8,8 +8,8 @@ function Copyright() {
       <Avatar style={{height: "70px", width: "70px", display: "block", marginLeft: "auto", marginRight: "auto", marginBottom: "10px"}} alt="Remy Sharp" src="/favicon.ico" />
       <Typography variant="body2" color="textSecondary" align="center">
         {'Copyright © '}
-        <Link color="inherit" href="https://material-ui.com/">
-          Change
+        <Link color="inherit">
+        Change Charity, LLC
         </Link>{' '}
         {new Date().getFullYear()}
         {'.'}

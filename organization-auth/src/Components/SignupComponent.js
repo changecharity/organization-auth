@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
 
 function SignupComponent(props) {
     const classes = useStyles();
+    const [acceptedTerms, setAcceptedTerms] = React.useState(false)
     const [orgName, setOrgName] = React.useState("")
     const [bankAccountEntered, setBankAccountEntered] = React.useState(false)
     const [email, setEmail] = React.useState("")
@@ -68,8 +69,8 @@ function SignupComponent(props) {
     }, []);
     const config = {
         clientName: 'Change',
-        env: 'sandbox',
-        product: ['transactions'],
+        env: 'development',
+        product: ['auth'],
         publicKey: '014d4f2c01905eafa07cbcd2755ef5',
         onSuccess,
         // ...
@@ -97,7 +98,7 @@ function SignupComponent(props) {
     function handleSubmit(event) {
         event.preventDefault();
         const onlyDigitsEIN = ein.replace(/\D/g, "")
-        if ((bankAccountEntered==true) && (onlyDigitsEIN.length==8 || onlyDigitsEIN.length==9) && (!orgName=="") && (!email.length==0) && (pass.length>=8) ) {
+        if ((bankAccountEntered==true) && (acceptedTerms===true) && (onlyDigitsEIN.length==8 || onlyDigitsEIN.length==9) && (!orgName=="") && (!email.length==0) && (pass.length>=8) ) {
             axios({ 
                 url: "https://api.changecharity.io/orgs/signup",
                 data: JSON.stringify({
@@ -236,8 +237,8 @@ function SignupComponent(props) {
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
-                                control={<Checkbox value="allowExtraEmails" color="primary" />}
-                                label="I want to receive inspiration, marketing promotions and updates via email."
+                                control={<Checkbox color="primary" checked={acceptedTerms} onChange={() => setAcceptedTerms(!acceptedTerms)} />}
+                                label="By clicking here you accept our Terms of Service and Privacy Policy"
                             />
                         </Grid>
                     </Grid>

@@ -99,7 +99,7 @@ function App() {
                 </div>
               </ThemeProvider>
             )
-          } else if (response!=null) {
+          } else if (response!=null) { 
             console.log(response)
             if (response["data"] === "success") {
               window.location.href = 'https://dashboard.changecharity.io/'

@@ -64,6 +64,7 @@ function SignupComponent(props) {
         // send token to server
         setPlaidToken(token)
         setBankName(metadata["institution"]["name"])
+        console.log(metadata);
         setCheckingAccountId(metadata["accounts"])
         setBankAccountEntered(true)
     }, []);
@@ -88,7 +89,7 @@ function SignupComponent(props) {
 
     function setCheckingAccountId(accounts) {
         accounts.forEach(account => {
-            if (account["name"].includes("Checking")) {
+            if (account["subtype"] == "checking") {
                 console.log("gotit")
                 console.log(account["id"])
                 setAccountId(account["id"])
@@ -99,7 +100,7 @@ function SignupComponent(props) {
         event.preventDefault();
         const onlyDigitsEIN = ein.replace(/\D/g, "")
         if ((bankAccountEntered==true) && (acceptedTerms===true) && (onlyDigitsEIN.length==8 || onlyDigitsEIN.length==9) && (!orgName=="") && (!email.length==0) && (pass.length>=8) ) {
-            axios({ 
+            axios({
                 url: "https://api.changecharity.io/orgs/signup",
                 data: JSON.stringify({
                     name: orgName,
@@ -221,7 +222,7 @@ function SignupComponent(props) {
                                 error={passwordError}
                                 helperText={errorDes}
                                 value={pass}
-                                onChange={e=> 
+                                onChange={e=>
                                     {
                                     setPass(e.target.value)
                                     setPasswordError(false)

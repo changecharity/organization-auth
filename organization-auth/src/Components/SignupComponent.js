@@ -72,6 +72,7 @@ function SignupComponent(props) {
         // send token to server
         setPlaidToken(token)
         setBankName(metadata["institution"]["name"])
+        console.log(metadata);
         setCheckingAccountId(metadata["accounts"])
         setBankAccountEntered(true)
     }, []);
@@ -100,7 +101,7 @@ function SignupComponent(props) {
 
     function setCheckingAccountId(accounts) {
         accounts.forEach(account => {
-            if (account["name"].includes("Checking")) {
+            if (account["subtype"] == "checking") {
                 console.log("gotit")
                 console.log(account["id"])
                 setAccountId(account["id"])

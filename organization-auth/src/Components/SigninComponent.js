@@ -36,8 +36,8 @@ function SigninComponent() {
     const [pass, setPass] = React.useState("")
     const [emailError, setEmailError] = React.useState(false)
     const [passError, setPassError] = React.useState(false)
-    const [passHelperText, setPassHelperText] = React.useState("Incorrect Password")
-    const [emailHelperText, setEmailHelperText] = React.useState("Email Not Recognized")
+    const [passHelperText, setPassHelperText] = React.useState("")
+    const [emailHelperText, setEmailHelperText] = React.useState("")
     function handleSubmit(event) {
       event.preventDefault();
       axios({ 

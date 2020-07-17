@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Avatar, Button, Chip, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, makeStyles, ThemeProvider, Container } from '@material-ui/core'
+import { Avatar, Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle, Chip, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, makeStyles, ThemeProvider, Container } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -14,6 +14,8 @@ import {
 } from "react-router-dom";
 import { Link as RouterLink } from "react-router-dom"
 import { usePlaidLink } from 'react-plaid-link';
+import PrivacyPolicy from './legal/PrivacyPolicy'
+import TermsOfService from './legal/TermsOfService'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -39,6 +41,10 @@ const useStyles = makeStyles((theme) => ({
     },
     bankChip: {
         marginTop: "10px"
+    },
+    termsOfServiceText: {
+        fontWeight:"bold",
+        color: theme.palette.primary.main
     }
 }));
 
@@ -60,6 +66,8 @@ function SignupComponent(props) {
     const [einErrorDes, setEinErrorDes] = React.useState("")
     const [emailError, setEmailError] = React.useState(false)
     const [emailErrorDes, setEmailErrorDes] = React.useState("")
+    const [openTerms, setOpenTerms] = React.useState(false);
+    const [TermsOrPrivacy, setTermsOrPrivacy] = React.useState(false)
     const onSuccess = useCallback((token, metadata) => {
         // send token to server
         setPlaidToken(token)
@@ -82,9 +90,13 @@ function SignupComponent(props) {
         setBankAccountEntered(false)
     };
 
+    const handleCloseTermsAndPrivacy = () => {
+        setOpenTerms(false);
+      };
+
     const handleClose = (event, reason) => {
         setOpenError(false);
-      };
+    };
 
     function setCheckingAccountId(accounts) {
         accounts.forEach(account => {
@@ -98,14 +110,14 @@ function SignupComponent(props) {
     function handleSubmit(event) {
         event.preventDefault();
         const onlyDigitsEIN = ein.replace(/\D/g, "")
-        if ((bankAccountEntered==true) && (acceptedTerms===true) && (onlyDigitsEIN.length==8 || onlyDigitsEIN.length==9) && (!orgName=="") && (!email.length==0) && (pass.length>=8) ) {
-            axios({ 
+        if ((bankAccountEntered == true) && (acceptedTerms === true) && (onlyDigitsEIN.length == 8 || onlyDigitsEIN.length == 9) && (!orgName == "") && (!email.length == 0) && (pass.length >= 8)) {
+            axios({
                 url: "https://api.changecharity.io/orgs/signup",
                 data: JSON.stringify({
                     name: orgName,
                     email: email,
                     password: pass,
-                    ein: parseInt(onlyDigitsEIN,10),
+                    ein: parseInt(onlyDigitsEIN, 10),
                     plaid_public_token: plaidToken,
                     plaid_account_id: accountId
                 }),
@@ -122,7 +134,7 @@ function SignupComponent(props) {
                         setEmailErrorDes("Email already exists")
                     }
                 } else {
-                window.location.href = '/confirm';
+                    window.location.href = '/confirm';
                 }
                 if (response.data.startsWith("eyJhbGciOi")) {
 
@@ -206,7 +218,8 @@ function SignupComponent(props) {
                                 onChange={e => {
                                     setEmailErrorDes("")
                                     setEmailError(false)
-                                    setEmail(e.target.value)}}
+                                    setEmail(e.target.value)
+                                }}
                                 id="email"
                                 label="Email Address"
                                 name="email"
@@ -221,13 +234,12 @@ function SignupComponent(props) {
                                 error={passwordError}
                                 helperText={errorDes}
                                 value={pass}
-                                onChange={e=> 
-                                    {
+                                onChange={e => {
                                     setPass(e.target.value)
                                     setPasswordError(false)
                                     setErrorDes("")
-                                    }
-                                  }
+                                }
+                                }
                                 name="password"
                                 label="Password"
                                 type="password"
@@ -238,7 +250,7 @@ function SignupComponent(props) {
                         <Grid item xs={12}>
                             <FormControlLabel
                                 control={<Checkbox color="primary" checked={acceptedTerms} onChange={() => setAcceptedTerms(!acceptedTerms)} />}
-                                label="By clicking here you accept our Terms of Service and Privacy Policy"
+                                label={<p>By clicking here you accept our <span className={classes.termsOfServiceText} onClick={() => {setTermsOrPrivacy(false); setOpenTerms(true);}}>Terms of Service</span> and <span className={classes.termsOfServiceText} onClick={() => {setTermsOrPrivacy(true); setOpenTerms(true);}}>Privacy Policy</span> </p>}
                             />
                         </Grid>
                     </Grid>
@@ -278,9 +290,10 @@ function SignupComponent(props) {
             </div>
             <Grid container>
                 <Grid item xs>
-                    <RouterLink to='/forgotpass'>
+                    
+                <RouterLink to='/forgotpass'>
                         <Link className={classes.link} variant="body2">
-                            {"Forgot Password?"}
+                            {"Forgot Password"}
                         </Link>
                     </RouterLink>
                 </Grid>
@@ -293,15 +306,43 @@ function SignupComponent(props) {
                 </Grid>
             </Grid>
             <Snackbar
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'left',
-        }}
-        onClose={handleClose}
-        open={openError}
-        autoHideDuration={4000}
-        message="Please make sure all of your information is filled in correctly."
-        />
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                onClose={handleClose}
+                open={openError}
+                autoHideDuration={4000}
+                message="Please make sure all of your information is filled in correctly."
+            />
+            <Dialog
+                open={openTerms}
+                onClose={handleCloseTermsAndPrivacy}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">{(TermsOrPrivacy ? "Privacy Policy": "Terms of Service")}</DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        {
+                            TermsOrPrivacy && (
+                                PrivacyPolicy
+                            )
+                        }
+                        {
+                            !TermsOrPrivacy && (
+                                TermsOfService
+                            )
+                        }
+          </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    
+                    <Button onClick={handleCloseTermsAndPrivacy} color="primary">
+                        Close
+          </Button>
+                </DialogActions>
+            </Dialog>
         </div>
     );
 }
@@ -312,7 +353,7 @@ export default SignupComponent
 
 String.prototype.removeCharAt = function (i) {
     var tmp = this.split(''); // convert to an array
-    tmp.splice(i - 1 , 1); // remove 1 element from the array (adjusting for non-zero-indexed counts)
+    tmp.splice(i - 1, 1); // remove 1 element from the array (adjusting for non-zero-indexed counts)
     return tmp.join(''); // reconstruct the string
 }
 

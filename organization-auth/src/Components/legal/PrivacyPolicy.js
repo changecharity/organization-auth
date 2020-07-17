@@ -1,0 +1,64 @@
+export default (`
+This Privacy Policy is incorporated by reference into the Change Charity Terms of Use. The terms “Change Charity,”“we,” and “us” include Change Charity, LLC and our affiliates and subsidiaries. The Privacy Policy explains how Change Charity may collect, use, and disclose information we obtain through the “Change Charity Service.”Any capitalized terms used and not defined in this Privacy Policy shall have the meaning given to them in the Terms of Use.
+“Personal Information” can be used to readily identify and/or contact you.
+“Personal Information” means information that alone or when in combination with other information may be used to readily identify, contact, or locate you, such as: name, address, email address, or phone number. We do not consider Personal Information to include information that has been anonymized so that it does not allow a third party to easily identify a specific individual.
+For the purposes of this Privacy Policy, “users” use the Change Charity Service to make donations, and “non-profits” use the Change Charity Service to receive donations.
+THE CHANGE CHARITY SERVICE COLLECTS YOUR INFORMATION
+We collect Personal Information when you:
+register to use the Change Charity Service;
+use the Change Charity Service; and
+communicate with us.
+We also collect information, such as anonymous usage statistics, by using cookies, server logs, and other similar technology as you use the Change Charity Service.
+Registration and Account Information. You must register to use the Change Charity Service as either a user or a non-profit. To register as a user, you may need to provide Personal Information to us, such as your name, email address, and password. To register as a non-profit, you may need to provide the organization’s information to us, such as its name, contact person, mailing address, email address, telephone number, and employee identification number. You may also provide other optional information for better donor engagement.
+Account Numbers & Online Banking Log-in Credentials. You may be required to provide our third-party service providers with Personal Information, such as your online banking log-in credentials. We currently use Plaid and Stripe to handle and store this information, and by using the Change Charity Service you agree to their terms and conditions of use and privacy policy. Plaid’s Terms of Use and Privacy Policy. Stripes Terms of Use and Privacy Policy. We do not handle or store your credit and debit card numbers or online banking log-in information.
+Financial Transaction Information. For us to provide the Change Charity Service to you as a user, our third-party service provider, Plaid, will use your online banking log-in credentials to retrieve and allow us to view only, using a secure client token and not your actual bank card information, the transaction details for transactions you make using the credit and debit cards you have connected to your profile.We use that information to calculate the amount you will donate each month.You expressly grant Plaid the right, power, and authority to access and transmit the financial transaction data as reasonably necessary to provide its services to us and you.
+Making Donations and Paying Donations. When we process donations (either deduct them from users’ accounts or pay them to nonprofits), we may receive summary information about the transactions that does not include credit card or bank account numbers.Our third-party payment processors, currently WePay, handle and store your credit and debit card and bank account information.
+Using the Change Charity Service. We collect any information you voluntarily provide through the Change Charity Service.
+Communicate with Us. We may collect Personal Information through your communications with our customer-support team or through other communications with us, including through social media.
+Automatic Data Collection: Cookies and Related Technologies. The Change Charity Service collects and stores information that is generated automatically as you use it, including information about your preferences and anonymous usage statistics.When we associate such information with Personal Information, we will treat the combination as Personal Information.
+By using the Change Charity Service, you are authorizing us to gather, parse, and retain data related to the provision of the Change Charity Service.We may retain such information, including Personal Information, indefinitely.
+HOW CHANGE  CHARITY USES YOUR INFORMATION
+We use Personal Information to:
+facilitate and improve our services; and
+communicate with you.
+We may use aggregate information for any purpose, including for marketing purposes.
+Internal and Service-Related Usage. We use information, including Personal Information, for internal and service-related purposes and may provide it to third parties to allow us to facilitate the Change Charity Service. We may use and retain any data we collect to provide and improve any of our services.
+Communications. We may send email to the email address you provide to us and push notifications to your mobile device if they are enabled to verify your account and for informational and operational purposes, such as account management, transaction processing, communicating for and about non-profits, customer service, system maintenance, and other Change Charity Service-related purposes. By using the Change Charity Service, you are agreeing to such emails. You also agree to receive text messages from your financial institutions for the purposes of registering your bank account with us.
+Marketing. We may use information, including Personal Information, to provide online advertising on the Change Charity Service and to send email or otherwise send you information we think may be useful or relevant to you.You may opt out of email marketing by using the unsubscribe link in a marketing email.
+Aggregate Data. We may anonymize or aggregate data collected through the Change Charity Service and use and disclose it for any purpose.
+CHANGE CHARITY MAY DISCLOSE YOUR INFORMATION
+We may share your Personal Information:
+with our third-party vendors and service providers;
+with non-profits;
+to comply with legal obligations;
+to protect and defend our rights and property; and
+with your permission.
+We may share Personal Information about you with non-profits for their direct marketing purposes.You can choose to opt out of the marketing materials at any time.
+We Use Vendors and Service Providers. We may share any information we receive with vendors and service providers we use to help us provide the Change Charity Service.
+Displaying to Non-Profits and Users. The content you, the non-profit, provide to the Change Charity Service may be displayed on the Change Charity Service. Other users of the Change Charity Service may be able to see some information about you, such as the non-profit information that is provided to us for the purpose of securing donations by end users.
+When you, the User, selects a non-profit to donate to, we will display information to that non-profit about you, such as your name, and the amount you donated. We are not responsible for how other users will view and use the posted information.
+Social Networking and Other Websites. The Change Charity Service may allow you to share information, including Personal Information, with social networking websites, such as Facebook. We do not share your Personal Information with them unless you direct the Change Charity Service to share it. Their use of the information will be governed by their privacy policies, and you may be able to modify your privacy settings on their websites
+Legal and Similar Disclosures. We may access, preserve, and disclose collected information, if we believe doing so is required or appropriate to: comply with law enforcement requests and legal process, such as a court order or subpoena; respond to your requests; comply with the law; or protect your, our, or others’ rights, property, or safety.
+Merger, Sale, or Other Asset Transfers. If we are involved in a merger, acquisition, financing due diligence, reorganization, bankruptcy, receivership, sale of Change Charity assets, or transition of service to another provider, your information may be sold or transferred as part of such a transaction as permitted by law and/or contract. We cannot control how such entities may use or disclose such information.
+With Your Permission. We may also disclose your Personal Information with your permission.
+INFORMATION SECURITY
+We take steps to ensure that your information is treated securely and in accordance with this Privacy Policy. Unfortunately, the Internet cannot be guaranteed to be 100% secure, and we cannot ensure or warrant the security of any information you provide to us. We do not accept liability for unintentional disclosure.
+By using the Change Charity Service or providing Personal Information to us, you agree that we may communicate with you electronically regarding security, privacy, and administrative issues relating to your use of the Change Charity Service. If we learn of a security system’s breach, we may attempt to notify you electronically by posting a notice on the Change Charity Service or sending an email to you. You may have a legal right to receive this notice by mail.
+CHILDREN’S PRIVACY
+We do not knowingly collect information from children under 13. We will take steps to delete it if we learn we have collected it.
+We do not knowingly collect, maintain, or use personal information from children under 13 years of age, and no part of the Change Charity Service is directed to children under the age of 13. If you learn that your child has provided us with personal information without your consent, you may alert us at support@changecharity.io. If we learn that we have collected any personal information from children under 13, we will promptly take steps to delete such information and terminate the child’s account.
+INTERNATIONAL USERS
+By using the Change Charity Service, you will transfer data to the United States.
+If you are visiting from the European Union or other regions with laws governing data collection and use, you agree to the transfer of your information to the United States and processing globally. By providing your information you consent to any transfer and processing in accordance with this Privacy Policy.
+UPDATE YOUR INFORMATION OR POSE A QUESTION OR SUGGESTION
+If you would like to update or correct any information that you have provided to us through your use of the Change Charity Service or otherwise, or if you have suggestions for improving this Privacy Policy, please send an email to support@changecharity.io.
+CHANGES TO OUR PRIVACY POLICY AND PRACTICES
+We may revise this Privacy Policy, so review it periodically.
+Posting of Revised Privacy Policy. We will post any adjustments to the Privacy Policy on this web page, and the revised version will be effective when it is posted.
+New Uses of Personal Information. From time to time, we may desire to use Personal Information for uses not previously disclosed in our Privacy Policy. If our practices change regarding previously collected Personal Information in a way that would be materially less restrictive than stated in the version of this Privacy Policy in effect at the time we collected the information, we will make reasonable efforts to provide notice and obtain consent to any such uses as may be required by law.
+California Privacy Rights
+Under California’s “Shine the Light” law, California residents who provide personal information in obtaining products or services for personal, family, or household use are entitled to request and obtain from us once a calendar year information about the customer information we shared, if any, with other businesses for their own direct marketing uses. If applicable, this information would include the categories of customer information shared, the names and addresses of those businesses with which we shared customer information for the immediately prior calendar year, and descriptions of the likely types of marketing the third parties would send.
+To obtain this information from us, please send an email message to support@changecharity.io or mail us at the address below with “Request for California Privacy Information” on the subject line and in the body of your message. If you are a California resident, we will provide the requested information to you at your e-mail address in response.
+Please be aware that not all information sharing is covered by the “Shine the Light” requirements and only information on covered sharing will be included in our response.
+Effective Date: 07/02/2020
+`);

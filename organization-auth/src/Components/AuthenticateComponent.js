@@ -57,11 +57,13 @@ function AuthenticateComponent(props) {
             setErrorDes("Invalid Code")
           } else if (response["status"]==200) {
             let formData = new FormData()
-            console.log(props)
-            console.log(props.imageFile)
-            console.log(cookie.load('orgLogo'))
+            fetch(cookie.load('orgLogo'))
+            .then(res => res.blob())
+            .then(blob => {
+            const file = new File([blob], 'logoFile.png', blob)
+            console.log(file)
             formData.name = "logoFile"
-            formData.append('logoFile',cookie.load('orgLogo'))
+            formData.append('logoFile',file)
             axios({
               url: "https://api.changecharity.io/orgs/uploadlogo",
               method: "POST",
@@ -75,6 +77,8 @@ function AuthenticateComponent(props) {
             }).catch(error => {
               console.log(error.response)
             })
+            })
+            
             
           }
       }).catch(error => {

@@ -90,7 +90,6 @@ function SignupComponent(props) {
     const [openTerms, setOpenTerms] = React.useState(false);
     const [TermsOrPrivacy, setTermsOrPrivacy] = React.useState(false)
     const [orgLogo, setOrgLogo] = React.useState("")
-    const [imageFile, setImageFile] = React.useState(null)
     const onSuccess = useCallback((token, metadata) => {
         // send token to server
         setPlaidToken(token)
@@ -123,7 +122,6 @@ function SignupComponent(props) {
 
     const onFileChange = (event) => {
         console.log("Here is props", props, event.target.files[0])
-        props.setImageFile(event.target.files[0])
         
         if (event.target.files[0] !== undefined) {
           let imageSrc = URL.createObjectURL(event.target.files[0])
@@ -170,13 +168,12 @@ function SignupComponent(props) {
                         setEmailErrorDes("Email already exists")
                     }
                 } else {
-                    window.location.href = '/confirm';
+                    props.setIsConfirm(true)
                 }
                 if (response.data.startsWith("eyJhbGciOi")) {
 
                 }
             }).catch(error => {
-                console.log("heres where")
                 console.log(error)
                 setOpenError(true)
             })

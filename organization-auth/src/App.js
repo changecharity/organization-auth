@@ -52,6 +52,7 @@ const axiosInstance = axios.create({
 function App() {
   const classes = useStyles();
   const [imageFile, setImageFile] = React.useState(null)
+  const [isConfirm, setIsConfirm] = React.useState(false)
   console.log("app image file", imageFile)
   return (
   <AxiosProvider instance={axiosInstance}>
@@ -78,10 +79,10 @@ function App() {
                   <ForgotPasswordComponent  />
                 </Route>
                 <Route path="/signup">
-                  <SignupComponent setImageFile={setImageFile}  />
-                </Route>
-                <Route path="/confirm">
-                  <AuthenticateComponent imageFile={imageFile} />
+                  {
+                    isConfirm===false ? <SignupComponent setIsConfirm={setIsConfirm}  /> :
+                    <AuthenticateComponent />
+                  }
                 </Route>
                 <Route path="/">
                   <SigninComponent />
@@ -123,10 +124,10 @@ function App() {
                   <ForgotPasswordComponent  />
                 </Route>
                 <Route path="/signup">
-                  <SignupComponent imageFile={imageFile} setImageFile={setImageFile}   />
-                </Route>
-                <Route path="/confirm">
-                  <AuthenticateComponent imageFile={imageFile} />
+                  {
+                    isConfirm===false ? <SignupComponent setIsConfirm={setIsConfirm}  /> :
+                    <AuthenticateComponent />
+                  }
                 </Route>
                 <Route path="/">
                   <SigninComponent />

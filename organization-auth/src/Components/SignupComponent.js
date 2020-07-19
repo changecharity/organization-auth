@@ -78,6 +78,8 @@ function SignupComponent(props) {
     const [ein, setEin] = React.useState("")
     const [bankName, setBankName] = React.useState("")
     const [accountId, setAccountId] = React.useState("")
+    const [accountMask, setAccountMask] = React.useState("")
+
     const [openError, setOpenError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false)
     const [errorDes, setErrorDes] = React.useState("")
@@ -92,8 +94,7 @@ function SignupComponent(props) {
     const onSuccess = useCallback((token, metadata) => {
         // send token to server
         setPlaidToken(token)
-        setBankName(metadata["institution"]["name"])
-        console.log(metadata);
+        setBankName(metadata["accounts"][0]["verification_status"] == "pending_manual_verification" ? "manual_verify" : metadata["institution"]["name"])
         setCheckingAccountId(metadata["accounts"])
         setBankAccountEntered(true)
     }, []);
@@ -135,8 +136,8 @@ function SignupComponent(props) {
         accounts.forEach(account => {
             if (account["subtype"] == "checking") {
                 console.log("gotit")
-                console.log(account["id"])
                 setAccountId(account["id"])
+                setAccountMask(Number(account["mask"]))
             }
         })
     }
@@ -152,7 +153,9 @@ function SignupComponent(props) {
                     password: pass,
                     ein: parseInt(onlyDigitsEIN, 10),
                     plaid_public_token: plaidToken,
-                    plaid_account_id: accountId
+                    plaid_account_id: accountId,
+                    mask: accountMask,
+                    bank_name: bankName,
                 }),
                 method: "POST",
                 withCredentials: true

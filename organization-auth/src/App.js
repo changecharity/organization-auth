@@ -51,6 +51,8 @@ const axiosInstance = axios.create({
 
 function App() {
   const classes = useStyles();
+  const [imageFile, setImageFile] = React.useState(null)
+  console.log("app image file", imageFile)
   return (
   <AxiosProvider instance={axiosInstance}>
     <Post url={"checklogin"} >
@@ -76,10 +78,10 @@ function App() {
                   <ForgotPasswordComponent  />
                 </Route>
                 <Route path="/signup">
-                  <SignupComponent  />
+                  <SignupComponent setImageFile={setImageFile}  />
                 </Route>
                 <Route path="/confirm">
-                  <AuthenticateComponent />
+                  <AuthenticateComponent imageFile={imageFile} />
                 </Route>
                 <Route path="/">
                   <SigninComponent />
@@ -121,10 +123,10 @@ function App() {
                   <ForgotPasswordComponent  />
                 </Route>
                 <Route path="/signup">
-                  <SignupComponent  />
+                  <SignupComponent imageFile={imageFile} setImageFile={setImageFile}   />
                 </Route>
                 <Route path="/confirm">
-                  <AuthenticateComponent />
+                  <AuthenticateComponent imageFile={imageFile} />
                 </Route>
                 <Route path="/">
                   <SigninComponent />

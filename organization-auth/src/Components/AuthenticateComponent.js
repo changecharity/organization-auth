@@ -1,4 +1,5 @@
 import React from 'react';
+import cookie from 'react-cookies'
 import {Avatar, Button, CssBaseline, TextField,FormControlLabel,Checkbox,Link,Grid,Box,Typography,makeStyles,ThemeProvider, Container} from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import theme from '../Theme'
@@ -34,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
-function AuthenticateComponent() {
+function AuthenticateComponent(props) {
     const classes = useStyles();
     const [key, setKey] = React.useState("")
     const [error, setError] = React.useState(false)
@@ -55,7 +56,26 @@ function AuthenticateComponent() {
             setError(true)
             setErrorDes("Invalid Code")
           } else if (response["status"]==200) {
-            window.location.href = 'https://dashboard.changecharity.io/'
+            let formData = new FormData()
+            console.log(props)
+            console.log(props.imageFile)
+            console.log(cookie.load('orgLogo'))
+            formData.name = "logoFile"
+            formData.append('logoFile',cookie.load('orgLogo'))
+            axios({
+              url: "https://api.changecharity.io/orgs/uploadlogo",
+              method: "POST",
+              data: formData,
+              withCredentials: true,
+            }).then(response => {
+              console.log(response)
+
+              window.location.href = 'https://dashboard.changecharity.io/'
+        
+            }).catch(error => {
+              console.log(error.response)
+            })
+            
           }
       }).catch(error => {
           console.log(error)

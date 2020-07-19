@@ -1,4 +1,5 @@
 import React, { useCallback } from 'react';
+import cookie from 'react-cookies'
 import { Avatar, Button,Dialog,DialogActions,DialogContent,DialogContentText,DialogTitle, Chip, CssBaseline, TextField, FormControlLabel, Checkbox, Link, Grid, Box, Typography, makeStyles, ThemeProvider, Container } from '@material-ui/core'
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined'
 import AccountBalanceIcon from '@material-ui/icons/AccountBalance';
@@ -45,6 +46,24 @@ const useStyles = makeStyles((theme) => ({
     termsOfServiceText: {
         fontWeight:"bold",
         color: theme.palette.primary.main
+    },
+    addOrgButton:{
+        textTransform: "capitalize",
+        marginLeft: "8px"
+    },
+    uploadButtonWrapper: {
+      position: "relative",
+      overflow: "hidden",
+      display: "inline-block",
+  
+    },
+    fileButton: {
+      fontSize: "100px",
+      position: "absolute",
+      left: 0,
+      top: 0,
+      opacity: 0,
+      cursor: 'pointer'
     }
 }));
 
@@ -68,6 +87,8 @@ function SignupComponent(props) {
     const [emailErrorDes, setEmailErrorDes] = React.useState("")
     const [openTerms, setOpenTerms] = React.useState(false);
     const [TermsOrPrivacy, setTermsOrPrivacy] = React.useState(false)
+    const [orgLogo, setOrgLogo] = React.useState("")
+    const [imageFile, setImageFile] = React.useState(null)
     const onSuccess = useCallback((token, metadata) => {
         // send token to server
         setPlaidToken(token)
@@ -78,7 +99,7 @@ function SignupComponent(props) {
     }, []);
     const config = {
         clientName: 'Change',
-        env: 'development',
+        env: 'sandbox',
         product: ['auth'],
         publicKey: '014d4f2c01905eafa07cbcd2755ef5',
         onSuccess,
@@ -98,6 +119,17 @@ function SignupComponent(props) {
     const handleClose = (event, reason) => {
         setOpenError(false);
     };
+
+    const onFileChange = (event) => {
+        console.log("Here is props", props, event.target.files[0])
+        props.setImageFile(event.target.files[0])
+        
+        if (event.target.files[0] !== undefined) {
+          let imageSrc = URL.createObjectURL(event.target.files[0])
+          setOrgLogo(imageSrc)
+          cookie.save('orgLogo', imageSrc, { path: '/' })
+        }
+      }
 
     function setCheckingAccountId(accounts) {
         accounts.forEach(account => {
@@ -247,6 +279,28 @@ function SignupComponent(props) {
                                 id="password"
                                 autoComplete="current-password"
                             />
+                        </Grid>
+                        <Grid container xs={12}>
+                        <Grid item xs={7}>
+                            <div className={classes.uploadButtonWrapper}>
+                                <Button
+                                        disabled={!ready}
+                                        className={classes.addOrgButton}
+                                        variant="contained"
+                                        color="primary"
+                                        
+                                    >
+                                        Add Organization Logo
+                                </Button>
+                                <input className={classes.fileButton} type="file" name="logoFile" accept="image/x-png,image/jpeg" onChange={onFileChange}  />
+                                
+                            </div>
+                        </Grid>
+                        <Grid item xs={2}>
+                        <Avatar alt={""} src={orgLogo} className={classes.small} />
+                        </Grid>
+                        
+                        
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel

@@ -71,7 +71,7 @@ function SignupComponent(props) {
     }, []);
     const config = {
         clientName: 'Change',
-        env: 'sandbox',
+        env: 'development',
         product: ['auth'],
         publicKey: '014d4f2c01905eafa07cbcd2755ef5',
         onSuccess,
@@ -102,7 +102,7 @@ function SignupComponent(props) {
         const onlyDigitsEIN = ein.replace(/\D/g, "")
         if ((bankAccountEntered==true) && (acceptedTerms===true) && (onlyDigitsEIN.length==8 || onlyDigitsEIN.length==9) && (!orgName=="") && (!email.length==0) && (pass.length>=8) ) {
             axios({
-                url: "http://localhost:8080/orgs/signup",
+                url: "https://api.changecharity.io/orgs/signup",
                 data: JSON.stringify({
                     name: orgName,
                     email: email,

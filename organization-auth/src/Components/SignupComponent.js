@@ -59,6 +59,8 @@ function SignupComponent(props) {
     const [ein, setEin] = React.useState("")
     const [bankName, setBankName] = React.useState("")
     const [accountId, setAccountId] = React.useState("")
+    const [accountMask, setAccountMask] = React.useState("")
+
     const [openError, setOpenError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false)
     const [errorDes, setErrorDes] = React.useState("")
@@ -71,14 +73,13 @@ function SignupComponent(props) {
     const onSuccess = useCallback((token, metadata) => {
         // send token to server
         setPlaidToken(token)
-        setBankName(metadata["institution"]["name"])
-        console.log(metadata);
+        setBankName(metadata["accounts"][0]["verification_status"] == "pending_manual_verification" ? "manual_verify" : metadata["institution"]["name"])
         setCheckingAccountId(metadata["accounts"])
         setBankAccountEntered(true)
     }, []);
     const config = {
         clientName: 'Change',
-        env: 'development',
+        env: 'sandbox',
         product: ['auth'],
         publicKey: '014d4f2c01905eafa07cbcd2755ef5',
         onSuccess,
@@ -103,8 +104,8 @@ function SignupComponent(props) {
         accounts.forEach(account => {
             if (account["subtype"] == "checking") {
                 console.log("gotit")
-                console.log(account["id"])
                 setAccountId(account["id"])
+                setAccountMask(Number(account["mask"]))
             }
         })
     }
@@ -113,14 +114,16 @@ function SignupComponent(props) {
         const onlyDigitsEIN = ein.replace(/\D/g, "")
         if ((bankAccountEntered == true) && (acceptedTerms === true) && (onlyDigitsEIN.length == 8 || onlyDigitsEIN.length == 9) && (!orgName == "") && (!email.length == 0) && (pass.length >= 8)) {
             axios({
-                url: "https://api.changecharity.io/orgs/signup",
+                url: "http://localhost:8080/orgs/signup",
                 data: JSON.stringify({
                     name: orgName,
                     email: email,
                     password: pass,
                     ein: parseInt(onlyDigitsEIN, 10),
                     plaid_public_token: plaidToken,
-                    plaid_account_id: accountId
+                    plaid_account_id: accountId,
+                    mask: accountMask,
+                    bank_name: bankName,
                 }),
                 method: "POST",
                 withCredentials: true

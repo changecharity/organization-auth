@@ -1,6 +1,6 @@
 {
   "name": "organization-auth",
-  "version": "0.1.5",
+  "version": "v0.1.6",
   "private": true,
   "dependencies": {
     "@material-ui/core": "^4.9.13",

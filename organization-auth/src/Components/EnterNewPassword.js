@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const API_ROOT = require('../app-settings.json')['API_ROOT']
+
 function EnterNewPassword() {
     const classes = useStyles();
     const [newPass, setNewPass] = React.useState("")
@@ -45,7 +47,7 @@ function EnterNewPassword() {
         event.preventDefault();
         if (newPass.length >= 8) {
             axios({
-                url: "https://api.changecharity.io/orgs/forgotpass", 
+                url: API_ROOT + "/orgs/forgotpass", 
                 data: JSON.stringify({
                     password: newPass,
                     key: parseInt(cookie.load('passkey'), 10),

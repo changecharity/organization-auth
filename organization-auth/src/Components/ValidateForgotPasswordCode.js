@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const API_ROOT = require('../app-settings.json')['API_ROOT']
+
 function ValidateForgotPasswordCode(props) {
     const classes = useStyles();
     const [forgotPasswordCode, setForgotPasswordCode] = React.useState("")
@@ -43,7 +45,7 @@ function ValidateForgotPasswordCode(props) {
     function handleSubmit(event) {
         event.preventDefault();
         axios({
-            url: "https://api.changecharity.io/orgs/validkey",
+            url: API_ROOT + "/orgs/validkey",
             data: JSON.stringify({
                 key: Number(forgotPasswordCode)
             }),

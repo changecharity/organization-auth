@@ -67,6 +67,8 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 
+const API_ROOT = require('./../app-settings.json')['API_ROOT']
+
 function SignupComponent(props) {
     const classes = useStyles();
     const [acceptedTerms, setAcceptedTerms] = React.useState(false)
@@ -89,6 +91,7 @@ function SignupComponent(props) {
     const [emailErrorDes, setEmailErrorDes] = React.useState("")
     const [openTerms, setOpenTerms] = React.useState(false);
     const [TermsOrPrivacy, setTermsOrPrivacy] = React.useState(false)
+    const [chosePhoto, setChosePhoto] = React.useState(false)
     const [orgLogo, setOrgLogo] = React.useState("")
     const onSuccess = useCallback((token, metadata) => {
         // send token to server
@@ -113,6 +116,7 @@ function SignupComponent(props) {
     };
 
     const handleCloseTermsAndPrivacy = () => {
+        setAcceptedTerms(!acceptedTerms)
         setOpenTerms(false);
       };
 
@@ -126,6 +130,7 @@ function SignupComponent(props) {
         if (event.target.files[0] !== undefined) {
           let imageSrc = URL.createObjectURL(event.target.files[0])
           setOrgLogo(imageSrc)
+          setChosePhoto(true)
           cookie.save('orgLogo', imageSrc, { path: '/' })
         }
       }
@@ -142,9 +147,9 @@ function SignupComponent(props) {
     function handleSubmit(event) {
         event.preventDefault();
         const onlyDigitsEIN = ein.replace(/\D/g, "")
-        if ((bankAccountEntered == true) && (acceptedTerms === true) && (onlyDigitsEIN.length == 8 || onlyDigitsEIN.length == 9) && (!orgName == "") && (!email.length == 0) && (pass.length >= 8)) {
+        if ((bankAccountEntered == true) && (chosePhoto === true) && (acceptedTerms === true) && (onlyDigitsEIN.length == 8 || onlyDigitsEIN.length == 9) && (!orgName == "") && (!email.length == 0) && (pass.length >= 8)) {
             axios({
-                url: "https://api.changecharity.io/orgs/signup",
+                url: API_ROOT + "/orgs/signup",
                 data: JSON.stringify({
                     name: orgName,
                     email: email,
@@ -237,7 +242,7 @@ function SignupComponent(props) {
                                 fullWidth
                                 id="orgEin"
                                 label="Organization EIN"
-                                autoFocus
+                                
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -281,7 +286,7 @@ function SignupComponent(props) {
                             />
                         </Grid>
                         <Grid container xs={12}>
-                        <Grid item xs={7}>
+                        <Grid item xs={6}>
                             <div className={classes.uploadButtonWrapper}>
                                 <Button
                                         disabled={!ready}

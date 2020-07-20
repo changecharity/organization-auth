@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
       position: "relative",
       overflow: "hidden",
       display: "inline-block",
-  
+
     },
     fileButton: {
       fontSize: "100px",
@@ -99,7 +99,7 @@ function SignupComponent(props) {
     }, []);
     const config = {
         clientName: 'Change',
-        env: 'sandbox',
+        env: 'production',
         product: ['auth'],
         publicKey: '014d4f2c01905eafa07cbcd2755ef5',
         onSuccess,
@@ -122,7 +122,7 @@ function SignupComponent(props) {
 
     const onFileChange = (event) => {
         console.log("Here is props", props, event.target.files[0])
-        
+
         if (event.target.files[0] !== undefined) {
           let imageSrc = URL.createObjectURL(event.target.files[0])
           setOrgLogo(imageSrc)
@@ -288,19 +288,19 @@ function SignupComponent(props) {
                                         className={classes.addOrgButton}
                                         variant="contained"
                                         color="primary"
-                                        
+
                                     >
                                         Add Organization Logo
                                 </Button>
                                 <input className={classes.fileButton} type="file" name="logoFile" accept="image/x-png,image/jpeg" onChange={onFileChange}  />
-                                
+
                             </div>
                         </Grid>
                         <Grid item xs={2}>
                         <Avatar alt={""} src={orgLogo} className={classes.small} />
                         </Grid>
-                        
-                        
+
+
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
@@ -345,7 +345,7 @@ function SignupComponent(props) {
             </div>
             <Grid container>
                 <Grid item xs>
-                    
+
                 <RouterLink to='/forgotpass'>
                         <Link className={classes.link} variant="body2">
                             {"Forgot Password"}
@@ -392,7 +392,7 @@ function SignupComponent(props) {
           </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    
+
                     <Button onClick={handleCloseTermsAndPrivacy} color="primary">
                         Close
           </Button>

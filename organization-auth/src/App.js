@@ -52,9 +52,7 @@ function App() {
   const classes = useStyles();
   const [imageFile, setImageFile] = React.useState(null)
   const [isConfirm, setIsConfirm] = React.useState(false)
-  console.log("HEy this worked")
-  console.log("And this")
-  console.log("Third time")
+  console.log("final")
   
   return (
   <AxiosProvider instance={axiosInstance}>

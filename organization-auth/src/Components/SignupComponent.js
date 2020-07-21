@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
       position: "relative",
       overflow: "hidden",
       display: "inline-block",
-
+  
     },
     fileButton: {
       fontSize: "100px",
@@ -81,7 +81,6 @@ function SignupComponent(props) {
     const [bankName, setBankName] = React.useState("")
     const [accountId, setAccountId] = React.useState("")
     const [accountMask, setAccountMask] = React.useState("")
-
     const [openError, setOpenError] = React.useState(false);
     const [passwordError, setPasswordError] = React.useState(false)
     const [errorDes, setErrorDes] = React.useState("")
@@ -126,7 +125,7 @@ function SignupComponent(props) {
 
     const onFileChange = (event) => {
         console.log("Here is props", props, event.target.files[0])
-
+        console.log("HEy this worked ANTHER log")
         if (event.target.files[0] !== undefined) {
           let imageSrc = URL.createObjectURL(event.target.files[0])
           setOrgLogo(imageSrc)
@@ -293,19 +292,19 @@ function SignupComponent(props) {
                                         className={classes.addOrgButton}
                                         variant="contained"
                                         color="primary"
-
+                                        
                                     >
                                         Add Organization Logo
                                 </Button>
                                 <input className={classes.fileButton} type="file" name="logoFile" accept="image/x-png,image/jpeg" onChange={onFileChange}  />
-
+                                
                             </div>
                         </Grid>
                         <Grid item xs={2}>
                         <Avatar alt={""} src={orgLogo} className={classes.small} />
                         </Grid>
-
-
+                        
+                        
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
@@ -350,7 +349,7 @@ function SignupComponent(props) {
             </div>
             <Grid container>
                 <Grid item xs>
-
+                    
                 <RouterLink to='/forgotpass'>
                         <Link className={classes.link} variant="body2">
                             {"Forgot Password"}
@@ -397,7 +396,7 @@ function SignupComponent(props) {
           </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-
+                    
                     <Button onClick={handleCloseTermsAndPrivacy} color="primary">
                         Close
           </Button>

@@ -241,7 +241,7 @@ function SignupComponent(props) {
                                 fullWidth
                                 id="orgEin"
                                 label="Organization EIN"
-                                
+
                             />
                         </Grid>
                         <Grid item xs={12}>
@@ -323,7 +323,7 @@ function SignupComponent(props) {
                                 color="secondary"
                                 className={classes.link}
                             >
-                                Link Bank Account
+                                Link Checking Account
                             </Button>
                         ) :
                             (

@@ -8,6 +8,7 @@ import AuthenticateComponent from './Components/AuthenticateComponent'
 import ForgotPasswordComponent from './Components/ForgotPasswordComponent'
 import ValidateForgotPasswordCode from './Components/ValidateForgotPasswordCode'
 import EnterNewPassword from './Components/EnterNewPassword'
+
 import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
 import axios from 'axios'
 import {
@@ -40,10 +41,8 @@ const useStyles = makeStyles((theme) => ({
     color: "#3f51b5"
   }
 }));
-
-
-
-const BASE_URL = "https://api.changecharity.io/orgs/"
+const API_ROOT = require('./app-settings.json')['API_ROOT']
+const BASE_URL = API_ROOT + "/orgs/"
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
   withCredentials:true
@@ -53,7 +52,7 @@ function App() {
   const classes = useStyles();
   const [imageFile, setImageFile] = React.useState(null)
   const [isConfirm, setIsConfirm] = React.useState(false)
-  console.log("app image file", imageFile)
+  
   return (
   <AxiosProvider instance={axiosInstance}>
     <Post url={"checklogin"} >

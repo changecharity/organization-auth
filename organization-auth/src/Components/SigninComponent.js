@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+  const API_ROOT = require('../app-settings.json')['API_ROOT']
+
 function SigninComponent() {
     const classes = useStyles();
     const [email, setEmail] = React.useState("")
@@ -41,7 +43,7 @@ function SigninComponent() {
     function handleSubmit(event) {
       event.preventDefault();
       axios({ 
-        url: "https://api.changecharity.io/orgs/login",
+        url: API_ROOT + "/orgs/login",
         data: JSON.stringify({
             email: email,
             password: pass

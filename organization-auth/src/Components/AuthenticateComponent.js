@@ -35,6 +35,8 @@ const useStyles = makeStyles((theme) => ({
     }
   }));
 
+  const API_ROOT = require('../app-settings.json')['API_ROOT']
+
 function AuthenticateComponent(props) {
     const classes = useStyles();
     const [key, setKey] = React.useState("")
@@ -45,7 +47,7 @@ function AuthenticateComponent(props) {
       event.preventDefault();
       console.log(key)
       axios({
-      url: "https://api.changecharity.io/orgs/updatesignup",
+      url: API_ROOT + "/orgs/updatesignup",
       data: JSON.stringify({
           key: parseInt(key, 10)
       }),
@@ -65,7 +67,7 @@ function AuthenticateComponent(props) {
             formData.name = "logoFile"
             formData.append('logoFile',file)
             axios({
-              url: "https://api.changecharity.io/orgs/uploadlogo",
+              url: API_ROOT + "/orgs/uploadlogo",
               method: "POST",
               data: formData,
               withCredentials: true,
@@ -90,7 +92,7 @@ function AuthenticateComponent(props) {
       e.preventDefault();
       console.log("i guess")
       axios({
-      url: "https://api.changecharity.io/orgs/resendemailkey",
+      url: API_ROOT + "/orgs/resendemailkey",
       data: JSON.stringify({
 
       }),

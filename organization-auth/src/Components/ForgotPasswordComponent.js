@@ -30,6 +30,8 @@ const useStyles = makeStyles((theme) => ({
     },
   }));
 
+  const API_ROOT = require('../app-settings.json')['API_ROOT']
+
 function ForgotPasswordComponent() {
     const classes = useStyles();
     const [email, setEmail] = React.useState("")
@@ -37,7 +39,7 @@ function ForgotPasswordComponent() {
     const [errorDes, setErrorDes] = React.useState("")
     function handleSubmit(event) {
       event.preventDefault();
-      axios({ url: "https://api.changecharity.io/orgs/sendforgotpass",
+      axios({ url: API_ROOT + "/orgs/sendforgotpass",
         data: JSON.stringify({
             email: email
         }),

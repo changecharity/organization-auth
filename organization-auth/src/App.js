@@ -53,6 +53,7 @@ function App() {
   const [imageFile, setImageFile] = React.useState(null)
   const [isConfirm, setIsConfirm] = React.useState(false)
   console.log("final")
+  console.log("after error")
   
   return (
   <AxiosProvider instance={axiosInstance}>

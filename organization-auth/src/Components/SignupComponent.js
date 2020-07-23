@@ -288,7 +288,7 @@ function SignupComponent(props) {
                         <Grid item xs={6}>
                             <div className={classes.uploadButtonWrapper}>
                                 <Button
-                                        disabled={!ready}
+                                        
                                         className={classes.addOrgButton}
                                         variant="contained"
                                         color="primary"

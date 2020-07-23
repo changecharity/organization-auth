@@ -42,7 +42,7 @@ function SigninComponent() {
     const [emailHelperText, setEmailHelperText] = React.useState("")
     function handleSubmit(event) {
       event.preventDefault();
-      axios({ 
+      axios({
         url: API_ROOT + "/orgs/login",
         data: JSON.stringify({
             email: email,
@@ -77,7 +77,7 @@ function SigninComponent() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Organization Sign In
           </Typography>
           <form className={classes.form} onSubmit={handleSubmit} noValidate>
             <TextField

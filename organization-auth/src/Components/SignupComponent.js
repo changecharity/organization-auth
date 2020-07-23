@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
       position: "relative",
       overflow: "hidden",
       display: "inline-block",
-  
+
     },
     fileButton: {
       fontSize: "100px",
@@ -198,7 +198,7 @@ function SignupComponent(props) {
                     <LockOutlinedIcon />
                 </Avatar>
                 <Typography component="h1" variant="h5">
-                    Sign up
+                    Organization Sign Up
           </Typography>
                 <form className={classes.form} onSubmit={handleSubmit} noValidate>
                     <Grid container spacing={2}>
@@ -292,19 +292,19 @@ function SignupComponent(props) {
                                         className={classes.addOrgButton}
                                         variant="contained"
                                         color="primary"
-                                        
+
                                     >
                                         Add Organization Logo
                                 </Button>
                                 <input className={classes.fileButton} type="file" name="logoFile" accept="image/x-png,image/jpeg" onChange={onFileChange}  />
-                                
+
                             </div>
                         </Grid>
                         <Grid item xs={2}>
                         <Avatar alt={""} src={orgLogo} className={classes.small} />
                         </Grid>
-                        
-                        
+
+
                         </Grid>
                         <Grid item xs={12}>
                             <FormControlLabel
@@ -349,7 +349,7 @@ function SignupComponent(props) {
             </div>
             <Grid container>
                 <Grid item xs>
-                    
+
                 <RouterLink to='/forgotpass'>
                         <Link className={classes.link} variant="body2">
                             {"Forgot Password"}
@@ -396,7 +396,7 @@ function SignupComponent(props) {
           </DialogContentText>
                 </DialogContent>
                 <DialogActions>
-                    
+
                     <Button onClick={handleCloseTermsAndPrivacy} color="primary">
                         Close
           </Button>

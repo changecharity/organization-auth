@@ -52,8 +52,7 @@ function App() {
   const classes = useStyles();
   const [imageFile, setImageFile] = React.useState(null)
   const [isConfirm, setIsConfirm] = React.useState(false)
-  console.log("final")
-  console.log("after error")
+  console.log("0.1.6")
   
   return (
   <AxiosProvider instance={axiosInstance}>

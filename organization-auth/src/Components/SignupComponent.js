@@ -92,6 +92,7 @@ function SignupComponent(props) {
     const [TermsOrPrivacy, setTermsOrPrivacy] = React.useState(false)
     const [chosePhoto, setChosePhoto] = React.useState(false)
     const [orgLogo, setOrgLogo] = React.useState("")
+    const [generalErrorMessage, setGeneralErrorMessage] = React.useState("Please make sure all of your information is filled in correctly.")
     const onSuccess = useCallback((token, metadata) => {
         // send token to server
         setPlaidToken(token)
@@ -124,8 +125,6 @@ function SignupComponent(props) {
     };
 
     const onFileChange = (event) => {
-        console.log("Here is props", props, event.target.files[0])
-        console.log("HEy this worked ANTHER log")
         if (event.target.files[0] !== undefined) {
           let imageSrc = URL.createObjectURL(event.target.files[0])
           setOrgLogo(imageSrc)
@@ -145,6 +144,7 @@ function SignupComponent(props) {
     }
     function handleSubmit(event) {
         event.preventDefault();
+        setGeneralErrorMessage("Please make sure all of your information is filled in correctly.")
         const onlyDigitsEIN = ein.replace(/\D/g, "")
         if ((bankAccountEntered == true) && (chosePhoto === true) && (acceptedTerms === true) && (onlyDigitsEIN.length == 8 || onlyDigitsEIN.length == 9) && (!orgName == "") && (!email.length == 0) && (pass.length >= 8)) {
             axios({
@@ -185,6 +185,8 @@ function SignupComponent(props) {
             if (pass.length < 8) {
                 setPasswordError(true)
                 setErrorDes("Password must be at least 8 characters")
+            } else if (chosePhoto===false) {
+                setGeneralErrorMessage("Please choose an organization logo to continue.")
             }
             setOpenError(true)
         }
@@ -288,7 +290,6 @@ function SignupComponent(props) {
                         <Grid item xs={6}>
                             <div className={classes.uploadButtonWrapper}>
                                 <Button
-                                        
                                         className={classes.addOrgButton}
                                         variant="contained"
                                         color="primary"
@@ -371,8 +372,8 @@ function SignupComponent(props) {
                 }}
                 onClose={handleClose}
                 open={openError}
-                autoHideDuration={4000}
-                message="Please make sure all of your information is filled in correctly."
+                autoHideDuration={6000}
+                message={generalErrorMessage}
             />
             <Dialog
                 open={openTerms}

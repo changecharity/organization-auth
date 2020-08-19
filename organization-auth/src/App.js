@@ -52,7 +52,7 @@ function App() {
   const classes = useStyles();
   const [imageFile, setImageFile] = React.useState(null)
   const [isConfirm, setIsConfirm] = React.useState(false)
-  console.log("0.1.6")
+  console.log("0.1.7")
   
   return (
   <AxiosProvider instance={axiosInstance}>
@@ -79,10 +79,49 @@ function App() {
                   <ForgotPasswordComponent  />
                 </Route>
                 <Route path="/signup">
-                  {
-                    isConfirm===false ? <SignupComponent setIsConfirm={setIsConfirm}  /> :
-                    <AuthenticateComponent />
-                  }
+                  <Post url="createlinktoken" >
+                    {
+                      (error, response, isLoading, makeRequest, axios) => {
+                        if (error) {
+                          return (
+                            <ThemeProvider theme={theme}>
+                              <div style={{display:"flex", height:"100vh", alignItems:"center", justifyContent:"center"}}>
+                                <CircularProgress></CircularProgress>
+                              </div>
+                            </ThemeProvider>
+                          )
+                        } else if (response!==null) {
+                          console.log("here is response",response)
+                          // isConfirm===false ? <SignupComponent setIsConfirm={setIsConfirm} token={response["linkToken"]}  /> :
+                          // <AuthenticateComponent />
+                          if (isConfirm) {
+                            return (<AuthenticateComponent />)
+                          } else {
+                            return (
+                              <SignupComponent setIsConfirm={setIsConfirm} token={response["data"]["linkToken"]}  />
+                            )
+                          }
+                        } else if (isLoading) {
+                          return (
+                            <ThemeProvider theme={theme}>
+                              <div style={{display:"flex", height:"100vh", alignItems:"center", justifyContent:"center"}}>
+                                <CircularProgress></CircularProgress>
+                              </div>
+                            </ThemeProvider>
+                          )
+                        } else {
+                          
+                        }
+                        return (
+                          <ThemeProvider theme={theme}>
+                            <div style={{display:"flex", height:"100vh", alignItems:"center", justifyContent:"center"}}>
+                              <CircularProgress></CircularProgress>
+                            </div>
+                          </ThemeProvider>
+                        )
+                      }
+                    }
+                  </Post>
                 </Route>
                 <Route path="/">
                   <SigninComponent />
@@ -124,10 +163,49 @@ function App() {
                   <ForgotPasswordComponent  />
                 </Route>
                 <Route path="/signup">
-                  {
-                    isConfirm===false ? <SignupComponent setIsConfirm={setIsConfirm}  /> :
-                    <AuthenticateComponent />
-                  }
+                <Post url="createlinktoken" >
+                    {
+                      (error, response, isLoading, makeRequest, axios) => {
+                        if (error) {
+                          return (
+                            <ThemeProvider theme={theme}>
+                              <div style={{display:"flex", height:"100vh", alignItems:"center", justifyContent:"center"}}>
+                                <CircularProgress></CircularProgress>
+                              </div>
+                            </ThemeProvider>
+                          )
+                        } else if (response!==null) {
+                          console.log("here is response",response)
+                          // isConfirm===false ? <SignupComponent setIsConfirm={setIsConfirm} token={response["linkToken"]}  /> :
+                          // <AuthenticateComponent />
+                          if (isConfirm) {
+                            return (<AuthenticateComponent />)
+                          } else {
+                            return (
+                              <SignupComponent setIsConfirm={setIsConfirm} token={response["data"]["linkToken"]}  />
+                            )
+                          }
+                        } else if (isLoading) {
+                          return (
+                            <ThemeProvider theme={theme}>
+                              <div style={{display:"flex", height:"100vh", alignItems:"center", justifyContent:"center"}}>
+                                <CircularProgress></CircularProgress>
+                              </div>
+                            </ThemeProvider>
+                          )
+                        } else {
+                          
+                        }
+                        return (
+                          <ThemeProvider theme={theme}>
+                            <div style={{display:"flex", height:"100vh", alignItems:"center", justifyContent:"center"}}>
+                              <CircularProgress></CircularProgress>
+                            </div>
+                          </ThemeProvider>
+                        )
+                      }
+                    }
+                  </Post>
                 </Route>
                 <Route path="/">
                   <SigninComponent />

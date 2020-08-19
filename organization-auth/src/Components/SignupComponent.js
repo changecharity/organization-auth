@@ -101,13 +101,11 @@ function SignupComponent(props) {
         setBankAccountEntered(true)
     }, []);
     const config = {
-        clientName: 'Change',
-        env: 'production',
-        product: ['auth'],
-        publicKey: '014d4f2c01905eafa07cbcd2755ef5',
+        token: props.token,
         onSuccess,
         // ...
     };
+
     const { open, ready, error } = usePlaidLink(config);
 
     const handleDelete = () => {

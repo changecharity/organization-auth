@@ -7,7 +7,7 @@ import SignupComponent from './Components/SignupComponent'
 import AuthenticateComponent from './Components/AuthenticateComponent'
 import ForgotPasswordComponent from './Components/ForgotPasswordComponent'
 import ValidateForgotPasswordCode from './Components/ValidateForgotPasswordCode'
-import EnterNewPassword from './Components/EnterNewPassword'
+import EnterNewPassword from './Components/EnterNewPassword' 
 
 import { AxiosProvider, Request, Get, Delete, Head, Post, Put, Patch, withAxios } from 'react-axios'
 import axios from 'axios'
@@ -52,7 +52,7 @@ function App() {
   const classes = useStyles();
   const [imageFile, setImageFile] = React.useState(null)
   const [isConfirm, setIsConfirm] = React.useState(false)
-  console.log("0.1.7")
+  console.log("0.1.8")
   
   return (
   <AxiosProvider instance={axiosInstance}>

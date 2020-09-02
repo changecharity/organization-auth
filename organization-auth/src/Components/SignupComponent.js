@@ -185,6 +185,8 @@ function SignupComponent(props) {
                 setErrorDes("Password must be at least 8 characters")
             } else if (chosePhoto===false) {
                 setGeneralErrorMessage("Please choose an organization logo to continue.")
+            } else if (acceptedTerms===false) {
+                setGeneralErrorMessage("Please accept our terms of service.")
             }
             setOpenError(true)
         }
